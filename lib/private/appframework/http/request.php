@@ -426,17 +426,6 @@ class Request implements \ArrayAccess, \Countable, IRequest {
 	}
 
 	/**
-	 * Check if the requester sent along an mtime
-	 * @return false|int False or an mtime
-	 */
-	public function hasModificationTime() {
-		if(isset($this->server['HTTP_X_OC_MTIME'])) {
-			return (int)$this->server['HTTP_X_OC_MTIME'];
-		}
-		return false;
-	}
-
-	/**
 	 * Returns the remote address, if the connection came from a trusted proxy
 	 * and `forwarded_for_headers` has been configured then the IP address
 	 * specified in this header will be returned instead.

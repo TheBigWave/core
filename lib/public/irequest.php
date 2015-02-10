@@ -136,12 +136,6 @@ interface IRequest {
 	public function getId();
 
 	/**
-	 * Check if the requester sent along an mtime
-	 * @return false|int False or an mtime
-	 */
-	public function hasModificationTime();
-
-	/**
 	 * Returns the remote address, if the connection came from a trusted proxy
 	 * and `forwarded_for_headers` has been configured then the IP address
 	 * specified in this header will be returned instead.

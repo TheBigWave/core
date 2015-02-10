@@ -34,9 +34,9 @@ class OC_TemplateLayout extends OC_Template {
 		$this->config = \OC::$server->getConfig();
 
 		// Decide which page we show
-		if( $renderAs == 'user' ) {
+		if($renderAs == 'user') {
 			parent::__construct( 'core', 'layout.user' );
-			if(in_array(OC_APP::getCurrentApp(), array('settings','admin', 'help'))!==false) {
+			if(in_array(OC_App::getCurrentApp(), ['settings','admin', 'help']) !== false) {
 				$this->assign('bodyid', 'body-settings');
 			}else{
 				$this->assign('bodyid', 'body-user');

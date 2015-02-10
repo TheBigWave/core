@@ -244,7 +244,7 @@ class OC {
 			header($header);
 			ini_set('session.cookie_secure', 'on');
 
-			if ($request->getServerProtocol() <> 'https' and !OC::$CLI) {
+			if ($request->getServerProtocol() <> 'https' && !OC::$CLI) {
 				$url = 'https://' . $request->getServerHost() . $request->getRequestUri();
 				header("Location: $url");
 				exit();

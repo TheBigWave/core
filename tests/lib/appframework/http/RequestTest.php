@@ -366,25 +366,6 @@ class RequestTest extends \Test\TestCase {
 		$this->assertSame($firstId, $secondId);
 	}
 
-	public function testHasModificationTimeWithValue() {
-		$request = new Request(
-			[
-				'server' => [
-					'HTTP_X_OC_MTIME' => '1234567890',
-				]
-			],
-			$this->secureRandom,
-			$this->config,
-			$this->stream
-		);
-		$this->assertSame(1234567890, $request->hasModificationTime());
-	}
-
-	public function testHasModificationTimeWithoutValue() {
-		$request = new Request([], $this->secureRandom, $this->config, $this->stream);
-		$this->assertSame(false, $request->hasModificationTime());
-	}
-
 	public function testGetRemoteAddressWithoutTrustedRemote() {
 		$this->config
 			->expects($this->once())
