@@ -17,6 +17,7 @@ use OC\Security\Crypto;
 use OC\Security\Hasher;
 use OC\Security\SecureRandom;
 use OC\Diagnostics\NullEventLogger;
+use OC\Security\TrustedDomainHelper;
 use OCP\IServerContainer;
 use OCP\ISession;
 use OC\Tagging\TagMapper;
@@ -77,6 +78,7 @@ class Server extends SimpleContainer implements IServerContainer {
 					'requesttoken' => $requestToken,
 				],
 				$this->getSecureRandom(),
+				$this->getConfig(),
 				$stream
 			);
 		});
