@@ -932,7 +932,12 @@ class OC_Util {
 						break;
 					}
 				}
-				$location = $urlGenerator->getAbsoluteURL('/index.php/apps/' . $appId . '/');
+
+				if(getenv('modRewriteWorking') === 'true') {
+					$location = $urlGenerator->getAbsoluteURL('/apps/' . $appId . '/');
+				} else {
+					$location = $urlGenerator->getAbsoluteURL('/index.php/apps/' . $appId . '/');
+				}
 			}
 		}
 		return $location;

@@ -19,6 +19,10 @@ php_value default_charset 'UTF-8'
 </IfModule>
 </IfModule>
 <IfModule mod_rewrite.c>
+<IfModule mod_env.c>
+  SetEnv modRewriteWorking true
+</IfModule>
+
 RewriteEngine on
 RewriteRule .* - [env=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 RewriteRule ^\.well-known/host-meta /public.php?service=host-meta [QSA,L]
@@ -30,6 +34,18 @@ RewriteRule ^apps/contacts/carddav\.php remote.php/carddav/ [QSA,L]
 RewriteRule ^remote/(.*) remote.php [QSA,L]
 RewriteRule ^(build|tests|config|lib|3rdparty|templates)/.* - [R=404,L]
 RewriteRule ^(\.|autotest|occ|issue|indie|db_|console).* - [R=404,L]
+
+# Pretty URLs without leading /index.php/
+RewriteRule ^core/js/oc.js index.php/$0 [PT]
+RewriteRule ^core/preview.png index.php/$0 [PT]
+RewriteCond %{REQUEST_FILENAME} \.(css|js|svg|gif|png|html|ttf|woff)$ [OR]
+RewriteCond %{REQUEST_FILENAME} /index.php [OR]
+RewriteCond %{REQUEST_FILENAME} /remote.php [OR]
+RewriteCond %{REQUEST_FILENAME} /public.php [OR]
+RewriteCond %{REQUEST_FILENAME} /status.php [OR]
+RewriteCond %{REQUEST_FILENAME} /ocs/v1.php
+RewriteRule ^ - [L]
+RewriteRule .* index.php/$0 [PT]
 </IfModule>
 <IfModule mod_mime.c>
 AddType image/svg+xml svg svgz

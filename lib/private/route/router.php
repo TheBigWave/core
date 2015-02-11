@@ -57,7 +57,10 @@ class Router implements IRouter {
 	protected $loadedApps = array();
 
 	public function __construct() {
-		$baseUrl = \OC_Helper::linkTo('', 'index.php');
+		$baseUrl = \OC::$WEBROOT;
+		if(getenv('modRewriteWorking') !== 'true') {
+			$baseUrl = \OC_Helper::linkTo('', 'index.php');
+		}
 		if (!\OC::$CLI) {
 			$method = $_SERVER['REQUEST_METHOD'];
 		} else {
